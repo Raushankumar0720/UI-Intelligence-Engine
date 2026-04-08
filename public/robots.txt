@@ -1,0 +1,13 @@
+# Project LUCID SCAN — Robots Configuration
+User-agent: *
+Allow: /
+Allow: /generate
+Allow: /dashboard
+Allow: /history
+
+# Disallow sensitive auth routes
+Disallow: /api/auth/
+Disallow: /settings/
+
+# Sitemaps
+Sitemap: https://ui-intelligence-engine.vercel.app/sitemap.xml
