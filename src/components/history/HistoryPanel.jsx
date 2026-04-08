@@ -12,11 +12,14 @@ import useGeneratorStore from '../../store/generatorStore';
 import './HistoryPanel.css';
 
 export default function HistoryPanel() {
-  const {
-    history, selectFromHistory, deleteFromHistory,
-    clearHistory, addToCompare, compareMode, toggleCompareMode,
-    setRefineMode
-  } = useGeneratorStore();
+  const history = useGeneratorStore(s => s.history);
+  const selectFromHistory = useGeneratorStore(s => s.selectFromHistory);
+  const deleteFromHistory = useGeneratorStore(s => s.deleteFromHistory);
+  const clearHistory = useGeneratorStore(s => s.clearHistory);
+  const addToCompare = useGeneratorStore(s => s.addToCompare);
+  const compareMode = useGeneratorStore(s => s.compareMode);
+  const toggleCompareMode = useGeneratorStore(s => s.toggleCompareMode);
+  const setRefineMode = useGeneratorStore(s => s.setRefineMode);
   
   const [search, setSearch] = useState('');
   const [activeTab, setActiveTab] = useState('all'); // all | components | pages
