@@ -1,3 +1,10 @@
+# Dependencies
+node_modules/
+dist/
+dist-ssr/
+coverage/
+/server/node_modules/
+
 # Logs
 logs
 *.log
