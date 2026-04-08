@@ -1,0 +1,27 @@
+/* Compare Page Styles */
+
+.compare-page {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+}
+
+.compare-page__title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-8);
+}
+
+.compare-page__content {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  min-height: 400px;
+}
+
+@media (max-width: 768px) {
+  .compare-page__content {
+    padding: var(--space-4);
+  }
+}

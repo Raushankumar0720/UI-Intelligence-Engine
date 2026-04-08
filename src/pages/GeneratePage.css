@@ -1,0 +1,48 @@
+/* Generate Page Styles */
+
+.generate-page {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+}
+
+.generate-page__content {
+  min-height: calc(100vh - var(--space-20));
+  display: flex;
+  flex-direction: column;
+}
+
+.generate-page__result {
+  display: grid;
+  grid-template-columns: 1fr var(--panel-width);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.generate-page__main {
+  min-width: 0; /* Prevents overflow in flex/grid */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.generate-page__aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  position: sticky;
+  top: var(--space-6);
+}
+
+.generate-page__extra {
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .generate-page__result {
+    grid-template-columns: 1fr;
+  }
+  
+  .generate-page__aside {
+    position: static;
+  }
+}

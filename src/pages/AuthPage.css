@@ -1,0 +1,167 @@
+/* Auth Page Styling - Dual Pane Portal */
+
+.auth-page {
+  min-height: 100vh;
+  background: var(--color-bg-primary);
+  display: flex;
+}
+
+.auth-page__container {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  width: 100%;
+}
+
+/* Left Side (Showcase) */
+.auth-page__left {
+  position: relative;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--color-border-subtle);
+}
+
+/* Right Side (Form) */
+.auth-page__right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  background: var(--color-bg-primary);
+  position: relative;
+}
+
+.auth-page__form-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.auth-card__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 4px 10px;
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.1);
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: 800;
+  color: #10b981;
+  margin-bottom: var(--space-4);
+  letter-spacing: 0.1em;
+}
+
+.auth-card__title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+  letter-spacing: -0.01em;
+}
+
+.auth-card__subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+  line-height: var(--leading-relaxed);
+}
+
+.auth-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.auth-card__error {
+  padding: var(--space-3);
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.1);
+  border-radius: var(--radius-md);
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.auth-card__actions {
+  margin-top: var(--space-2);
+}
+
+.auth-card__footer {
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border-subtle);
+  text-align: center;
+}
+
+.auth-card__switch {
+  background: none;
+  border: none;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.auth-card__switch:hover {
+  color: var(--color-accent-400);
+}
+
+/* Mobile Responsiveness - Project OMNISCREEN Aggressive Stacking */
+@media (max-width: 1024px) {
+  .auth-page__container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .auth-page__left {
+    height: 40vh;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+  
+  .auth-page__right {
+    padding: var(--space-12) var(--space-6);
+    background: var(--color-bg-primary);
+    min-height: 60vh;
+  }
+
+  .auth-page__form-container {
+    max-width: 100%;
+  }
+
+  .auth-card__title {
+    font-size: var(--text-3xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-page__left {
+    height: 30vh;
+  }
+  
+  .auth-page__right {
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .auth-card__title {
+    font-size: var(--text-2xl);
+  }
+
+  .auth-card__form {
+    gap: var(--space-4);
+  }
+}
+
+@media (max-width: 360px) {
+  .auth-page__right {
+    padding: var(--space-6) var(--space-3);
+  }
+}

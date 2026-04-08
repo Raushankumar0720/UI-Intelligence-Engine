@@ -1,0 +1,54 @@
+/* ScoreGauge Component Styles */
+
+.score-gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  position: relative;
+}
+
+.score-gauge__svg {
+  transform: rotate(-90deg);
+}
+
+.score-gauge__bg {
+  fill: none;
+  stroke: var(--color-bg-hover);
+  stroke-width: 4;
+}
+
+.score-gauge__fill {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.score-gauge__text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Offset for the label below */
+  padding-bottom: 20px;
+}
+
+.score-gauge__value {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  font-family: var(--font-mono);
+}
+
+.score-gauge__label {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  font-weight: var(--font-medium);
+  margin-top: -4px;
+}

@@ -1,0 +1,78 @@
+/* Dashboard Layout Styles */
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.dashboard-layout__main {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  transition: margin-left var(--transition-slow);
+  padding: var(--space-6);
+  overflow-y: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.dashboard-layout--collapsed .dashboard-layout__main {
+  margin-left: var(--sidebar-collapsed);
+}
+
+@media (max-width: 768px) {
+  .dashboard-layout__main {
+    margin-left: var(--sidebar-collapsed);
+    padding: var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-layout__main {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: var(--space-4) var(--space-3);
+    padding-bottom: 100px; /* Space for MobileNav and CompareHub */
+  }
+}
+
+/* === DRAWERS (Elite Contextual Flow) === */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  z-index: var(--z-modal);
+}
+
+.drawer-panel {
+  position: fixed;
+  top: var(--space-4);
+  right: var(--space-4);
+  bottom: var(--space-4);
+  width: 440px;
+  max-width: calc(100vw - var(--space-8));
+  z-index: calc(var(--z-modal) + 1);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(139, 92, 246, 0.2);
+}
+
+.drawer-panel__content {
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Scrollbar styling for the drawer */
+.drawer-panel__content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.drawer-panel__content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.drawer-panel__content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}

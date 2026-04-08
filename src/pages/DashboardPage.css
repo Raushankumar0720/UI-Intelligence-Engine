@@ -1,0 +1,245 @@
+/* Dashboard Bento Grid Styles */
+
+.dashboard-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: var(--space-4);
+  grid-template-areas: 
+    "welcome welcome stats metrics"
+    "welcome welcome recent recent"
+    "shortcuts shortcuts recent recent";
+}
+
+/* Base Tile */
+.bento-tile {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6);
+  min-height: 200px;
+}
+
+/* Tile 1: Welcome */
+.bento-tile--welcome {
+  grid-area: welcome;
+  justify-content: center;
+  background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.1), transparent),
+              var(--color-bg-secondary);
+}
+
+.bento-tile__greeting {
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  margin-bottom: var(--space-2);
+  background: var(--gradient-prism);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bento-tile__subtitle {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+}
+
+/* Tile 2: Stats List */
+.bento-tile--stats-list {
+  grid-area: stats;
+  padding: 0;
+}
+
+.stats-mini-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  height: 100%;
+}
+
+.stat-pill {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-4);
+  background: rgba(15, 15, 25, 0.4);
+}
+
+.stat-pill__label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.stat-pill__value {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+/* Tile 3: Recent Activity */
+.bento-tile--recent {
+  grid-area: recent;
+}
+
+.bento-tile__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.bento-tile__title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.bento-tile__link {
+  font-size: var(--text-xs);
+  color: var(--color-accent-400);
+}
+
+.bento-tile__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.bento-list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+}
+
+.bento-list-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.bento-list-item__icon {
+  color: var(--color-accent-400);
+}
+
+.bento-list-item__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-list-item__name {
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.bento-list-item__meta {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.bento-list-item__score {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-success);
+}
+
+/* Tile 4: Metrics Viz */
+.bento-tile--metrics {
+  grid-area: metrics;
+  align-items: center;
+  justify-content: center;
+}
+
+.bento-tile__viz {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viz-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid var(--color-accent-600);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+}
+
+.viz-circle__value {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+}
+
+.viz-circle__label {
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+/* Tile 5: Shortcuts */
+.bento-tile--shortcuts {
+  grid-area: shortcuts;
+  padding: 0;
+}
+
+.shortcut-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+  height: 100%;
+}
+
+.shortcut-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.shortcut-btn:hover {
+  background: var(--color-bg-hover);
+  color: var(--color-accent-400);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+      "welcome welcome"
+      "stats metrics"
+      "recent recent"
+      "shortcuts shortcuts";
+  }
+}
+
+@media (max-width: 640px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "welcome"
+      "stats"
+      "metrics"
+      "recent"
+      "shortcuts";
+  }
+}

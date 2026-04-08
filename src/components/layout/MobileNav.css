@@ -1,0 +1,68 @@
+/* Mobile Navigation Styles - Bottom Bar */
+
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10, 10, 20, 0.8);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 1000;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.mobile-nav__container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 64px;
+}
+
+.mobile-nav__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  position: relative;
+  padding: 8px;
+  transition: all var(--transition-fast);
+}
+
+.mobile-nav__link--active {
+  color: var(--color-accent-400);
+}
+
+.mobile-nav__label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mobile-nav__indicator {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background: var(--color-accent-400);
+  border-radius: 0 0 4px 4px;
+  opacity: 0;
+  box-shadow: 0 0 10px var(--color-accent-500);
+  transition: opacity var(--transition-fast);
+}
+
+.mobile-nav__link--active .mobile-nav__indicator {
+  opacity: 1;
+}
+
+@media (max-width: 480px) {
+  .mobile-nav {
+    display: block;
+  }
+}
