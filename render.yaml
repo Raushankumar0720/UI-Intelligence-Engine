@@ -1,0 +1,18 @@
+# Render Blueprint for UI Intelligence Engine (Backend)
+services:
+  - type: web
+    name: ui-intelligence-api
+    env: node
+    plan: free # Use 'free' or 'starter'
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: JWT_SECRET
+        generateValue: true # Generate a random secret if not provided
+      - key: FRONTEND_URL
+        sync: false # Set this manually to your Vercel URL
