@@ -1,7 +1,7 @@
 /**
  * HistoryPanel — Displays generation history with search and management.
  */
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   History, Search, Trash2, ExternalLink, GitCompareArrows,
@@ -92,6 +92,12 @@ export default function HistoryPanel() {
     );
   }
 
+  // Stable Callback Handlers
+  const handleSelect = useCallback((id) => selectFromHistory(id), [selectFromHistory]);
+  const handleDelete = useCallback((id) => deleteFromHistory(id), [deleteFromHistory]);
+  const handleCompare = useCallback((item) => addToCompare(item), [addToCompare]);
+  const handleRefine = useCallback((id) => setRefineMode(id), [setRefineMode]);
+
   return (
     <div className="history-panel">
       <div className="history-panel__header">
@@ -163,10 +169,10 @@ export default function HistoryPanel() {
                     item={item} 
                     index={i}
                     compareMode={compareMode}
-                    onSelect={selectFromHistory}
-                    onDelete={deleteFromHistory}
-                    onCompare={addToCompare}
-                    onRefine={setRefineMode}
+                    onSelect={handleSelect}
+                    onDelete={handleDelete}
+                    onCompare={handleCompare}
+                    onRefine={handleRefine}
                   />
                 ))}
               </AnimatePresence>
@@ -179,12 +185,12 @@ export default function HistoryPanel() {
 }
 
 /**
- * Sub-component for individual history items to keep parent clean
+ * Sub-component for individual history items - Memoized for Pulse optimization
  */
-function HistoryItem({ 
+const HistoryItem = memo(({ 
   item, index, compareMode, 
   onSelect, onDelete, onCompare, onRefine 
-}) {
+}) => {
   const getAuditStatus = () => {
     if (!item.metrics) return 'none';
     const score = item.metrics.scores.performance;
@@ -250,4 +256,4 @@ function HistoryItem({
       </div>
     </motion.div>
   );
-}
+});
