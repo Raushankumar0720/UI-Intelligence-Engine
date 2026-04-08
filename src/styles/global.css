@@ -147,21 +147,30 @@ ul, ol {
   50% { opacity: 0.8; }
 }
 
+@keyframes skeleton-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--color-bg-tertiary) 25%,
-    var(--color-bg-hover) 50%,
-    var(--color-bg-tertiary) 75%
-  );
-  background-size: 200% 100%;
-  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg-tertiary);
   border-radius: var(--radius-md);
 }
 
-@keyframes skeleton-shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  animation: skeleton-shimmer 1.5s infinite;
+  will-change: transform;
 }
 
 /* === SCROLL PROGRESS BAR === */
@@ -238,6 +247,8 @@ h1, h2, h3, h4, h5, h6 {
     radial-gradient(at 50% 50%, var(--ambient-4) 0px, transparent 50%);
   filter: saturate(150%);
   transition: all var(--transition-slow);
+  transform: translateZ(0); /* Force GPU Acceleration */
+  will-change: background-image;
 }
 
 .mesh-background::after {
@@ -259,6 +270,8 @@ h1, h2, h3, h4, h5, h6 {
   filter: blur(120px);
   animation: float 15s infinite ease-in-out alternate;
   opacity: 0.7;
+  pointer-events: none;
+  transform: translateZ(0);
 }
 
 .ambient-orb--1 {
