@@ -5,6 +5,8 @@
 [![Design System](https://img.shields.io/badge/Design-Quantum--OS-FF4081?style=for-the-badge)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
 > **"Generate, Analyze, and Understand."** The UI Intelligence Engine is a production-grade, AI-powered design platform that bridges the gap between conceptual prompt and production-ready component.
+>
+> 🚀 **[Live Demo — Explore the Engine](https://ui-intelligence-engine-nu.vercel.app/)**
 
 ![Primary Dashboard Hero](./public/screenshots/hero.png)
 
