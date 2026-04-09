@@ -5,6 +5,7 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -13,15 +14,14 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    sourcemap: false, // Production optimization
     rollupOptions: {
-      external: [
-        // Explicitly isolate the server directory from the frontend bundle
-        /^server\/.*/,
-      ],
+      output: {
+        // Standard chunking strategy for long-term caching
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
+        },
+      },
     },
-  },
-  // Ensure Vite only scans the relevant directories
-  optimizeDeps: {
-    exclude: ['server'],
   },
 })
