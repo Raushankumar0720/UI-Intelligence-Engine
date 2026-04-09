@@ -14,22 +14,38 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware (Task 8: Production Security)
+// Middleware (Task 8: Resilient Production Security)
+const rawFrontendUrl = process.env.FRONTEND_URL || '';
+const cleanFrontendUrl = rawFrontendUrl.endsWith('/') ? rawFrontendUrl.slice(0, -1) : rawFrontendUrl;
+
 const allowedOrigins = [
   'http://localhost:5173',
-  process.env.FRONTEND_URL,
+  'http://127.0.0.1:5173',
+  cleanFrontendUrl,
 ].filter(Boolean);
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
+    // 1. Allow browser extensions, mobile apps, or local curl
     if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      return callback(new Error('The CORS policy for this site does not allow access from the specified Origin.'), false);
+    
+    // 2. Normalization: Check against the whitelist (handling trailing slash variance)
+    const normalizedOrigin = origin.endsWith('/') ? origin.slice(0, -1) : origin;
+    
+    if (allowedOrigins.indexOf(normalizedOrigin) !== -1 || allowedOrigins.includes(origin)) {
+      return callback(null, true);
     }
-    return callback(null, true);
+    
+    // 3. Environment Fallback: If no FRONTEND_URL is set on Render, block but log better
+    if (!process.env.FRONTEND_URL && process.env.NODE_ENV === 'production') {
+      console.warn('⚠️ WARNING: FRONTEND_URL not set in Cloud Dashboard. CORS may block requests.');
+    }
+    
+    return callback(new Error(`CORS Violation: ${origin} is not in Allowed Origins.`), false);
   },
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
 app.use(bodyParser.json());
