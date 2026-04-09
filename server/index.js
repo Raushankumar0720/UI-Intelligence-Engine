@@ -30,15 +30,23 @@ app.use(cors({
     if (!origin) return callback(null, true);
     
     // 2. Normalization: Check against the whitelist (handling trailing slash variance)
-    const normalizedOrigin = origin.endsWith('/') ? origin.slice(0, -1) : origin;
+    const normalizedOrigin = origin.toLowerCase().endsWith('/') ? origin.toLowerCase().slice(0, -1) : origin.toLowerCase();
     
-    if (allowedOrigins.indexOf(normalizedOrigin) !== -1 || allowedOrigins.includes(origin)) {
+    // 3. Precise match check
+    if (allowedOrigins.map(o => o.toLowerCase()).includes(normalizedOrigin)) {
+      return callback(null, true);
+    }
+
+    // 4. "Safe Deployment" Fallback: Auto-Permit Vercel Subdomains
+    // If the origin is from Vercel, we trust it to prevent the "CORS Block" on first deploy
+    if (normalizedOrigin.endsWith('.vercel.app')) {
+      console.log(`✅ [CORS] Dynamic Auto-Permit: ${origin}`);
       return callback(null, true);
     }
     
-    // 3. Environment Fallback: If no FRONTEND_URL is set on Render, block but log better
+    // 5. Environment Fallback Warning: If no FRONTEND_URL is set on Render
     if (!process.env.FRONTEND_URL && process.env.NODE_ENV === 'production') {
-      console.warn('⚠️ WARNING: FRONTEND_URL not set in Cloud Dashboard. CORS may block requests.');
+      console.warn(`⚠️ [CORS] Blocked: ${origin}. FRONTEND_URL is missing in dashboard.`);
     }
     
     return callback(new Error(`CORS Violation: ${origin} is not in Allowed Origins.`), false);
