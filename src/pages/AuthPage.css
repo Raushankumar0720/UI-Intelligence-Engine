@@ -113,6 +113,12 @@
 }
 
 /* Mobile Responsiveness - Project OMNISCREEN Aggressive Stacking */
+@media (max-width: 1200px) {
+  .auth-page__container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media (max-width: 1024px) {
   .auth-page__container {
     grid-template-columns: 1fr;
@@ -122,7 +128,9 @@
   }
   
   .auth-page__left {
-    height: 40vh;
+    height: auto;
+    min-height: 300px;
+    padding: var(--space-12) var(--space-6);
     border-right: none;
     border-bottom: 1px solid var(--color-border-subtle);
   }
@@ -130,11 +138,12 @@
   .auth-page__right {
     padding: var(--space-12) var(--space-6);
     background: var(--color-bg-primary);
-    min-height: 60vh;
+    min-height: auto;
   }
 
   .auth-page__form-container {
-    max-width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
   }
 
   .auth-card__title {
@@ -142,15 +151,22 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .auth-page__left {
-    height: 30vh;
-  }
-  
-  .auth-page__right {
+    min-height: 250px;
     padding: var(--space-8) var(--space-4);
   }
 
+  .auth-page__right {
+    padding: var(--space-8) var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-page__left {
+    min-height: 200px;
+  }
+  
   .auth-card__title {
     font-size: var(--text-2xl);
   }
@@ -158,10 +174,19 @@
   .auth-card__form {
     gap: var(--space-4);
   }
+
+  .auth-card__status {
+    font-size: 9px;
+    padding: 3px 8px;
+  }
 }
 
 @media (max-width: 360px) {
   .auth-page__right {
     padding: var(--space-6) var(--space-3);
+  }
+  
+  .auth-card__title {
+    font-size: var(--text-xl);
   }
 }

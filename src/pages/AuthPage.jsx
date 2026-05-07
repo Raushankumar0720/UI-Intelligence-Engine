@@ -15,7 +15,7 @@ import ScrollReveal from '../components/ui/ScrollReveal';
 import './AuthPage.css';
 
 export default function AuthPage() {
-  const [mode, setMode] = useState('login');
+  const [mode, setMode] = useState('Sign In');
   const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [errors, setErrors] = useState({});
   const { login, register, isLoading, error, clearError, isAuthenticated } = useAuthStore();
@@ -27,7 +27,7 @@ export default function AuthPage() {
 
   const validate = useCallback(() => {
     const errs = {};
-    if (mode === 'register' && !form.name.trim()) {
+    if (mode === 'Sign Up' && !form.name.trim()) {
       errs.name = 'Name is required.';
     }
     if (!form.email.trim()) {
@@ -37,7 +37,7 @@ export default function AuthPage() {
     }
     if (!form.password) {
       errs.password = 'Password is required.';
-    } else if (mode === 'register') {
+    } else if (mode === 'Sign Up') {
       const pw = validatePassword(form.password);
       if (!pw.valid) errs.password = pw.message;
     }
@@ -50,7 +50,7 @@ export default function AuthPage() {
     clearError();
     if (!validate()) return;
 
-    if (mode === 'login') {
+    if (mode === 'Sign In') {
       const result = await login(form.email, form.password);
       if (result.success) navigate('/dashboard');
     } else {
@@ -60,7 +60,7 @@ export default function AuthPage() {
   };
 
   const switchMode = () => {
-    setMode(mode === 'login' ? 'register' : 'login');
+    setMode(mode === 'Sign In' ? 'Sign Up' : 'Sign In');
     setErrors({});
     clearError();
   };
@@ -97,10 +97,10 @@ export default function AuthPage() {
                       transition={{ duration: 0.3 }}
                     >
                       <h2 className="auth-card__title">
-                        {mode === 'login' ? 'Authentication' : 'Registration'}
+                        {mode === 'Sign In' ? 'Sign In' : 'Sign Up'}
                       </h2>
                       <p className="auth-card__subtitle">
-                        {mode === 'login'
+                        {mode === 'Sign In'
                           ? 'Enter your credentials to access the engine.'
                           : 'Join the next generation of UI engineering.'}
                       </p>
@@ -110,7 +110,7 @@ export default function AuthPage() {
 
                 <form className="auth-card__form" onSubmit={handleSubmit} noValidate>
                   <AnimatePresence mode="wait">
-                    {mode === 'register' && (
+                    {mode === 'Sign Up' && (
                       <motion.div
                         key="name-field"
                         initial={{ opacity: 0, scale: 0.95 }}
@@ -170,15 +170,15 @@ export default function AuthPage() {
                       isLoading={isLoading}
                       icon={ArrowRight}
                     >
-                      {mode === 'login' ? 'Initialize Engine' : 'Begin Deployment'}
+                      {mode === 'Sign In' ? 'Initialize Engine' : 'Begin Deployment'}
                     </Button>
                   </div>
                 </form>
 
                 <div className="auth-card__footer">
-                   <button className="auth-card__switch" onClick={switchMode} type="button">
-                    {mode === 'login' 
-                      ? "Don't have access? Create Account" 
+                  <button className="auth-card__switch" onClick={switchMode} type="button">
+                    {mode === 'Sign In'
+                      ? "Don't have access? Create Account"
                       : "Already authorized? Sign In"}
                   </button>
                 </div>
